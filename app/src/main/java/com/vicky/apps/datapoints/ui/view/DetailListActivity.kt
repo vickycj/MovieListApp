@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.vicky.apps.datapoints.R
+
 import com.vicky.apps.datapoints.base.AppConstants
 import com.vicky.apps.datapoints.base.BaseActivity
 import com.vicky.apps.datapoints.common.ViewModelProviderFactory
@@ -18,6 +18,11 @@ import com.vicky.apps.datapoints.ui.model.DetailModel
 import com.vicky.apps.datapoints.ui.viewmodel.DetailListViewModel
 import kotlinx.android.synthetic.main.activity_detail_list.*
 import javax.inject.Inject
+import androidx.core.app.NavUtils
+
+import android.view.MenuItem
+import com.vicky.apps.datapoints.R
+
 
 class DetailListActivity : BaseActivity() {
 
@@ -33,7 +38,7 @@ class DetailListActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_list)
-
+        actionBar?.setDisplayHomeAsUpEnabled(true)
         loadValues()
 
         val intent: Intent =intent
@@ -49,6 +54,8 @@ class DetailListActivity : BaseActivity() {
 
         initializeValues(
            list,poster, poster2)
+
+        actionBar?.title = list[0].value
     }
 
     private fun initializeValues(data: ArrayList<DetailModel>?, poster: String?, poster2: String?) {
@@ -66,7 +73,17 @@ class DetailListActivity : BaseActivity() {
             else -> loadDefaultPoster(singleImageHolder)
         }
 
-
+        movie_title.text = data[0].value
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            R.id.home -> {
+                NavUtils.navigateUpFromSameTask(this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun loadValues() {

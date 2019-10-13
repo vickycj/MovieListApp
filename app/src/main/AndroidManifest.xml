@@ -12,7 +12,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.view.DetailListActivity"  android:theme="@style/ActivityTheme"></activity>
+        <activity android:name=".ui.view.DetailListActivity"  android:theme="@style/ActivityTheme" android:parentActivityName=".ui.view.MainActivity"></activity>
         <activity
                 android:name=".ui.view.MainActivity"
                 android:theme="@style/ActivityTheme">
