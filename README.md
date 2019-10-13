@@ -5,7 +5,7 @@ Architecture Design Pattern - MVVM (Model View ViewModel)
 Flow
 ---------
 
-In homepage it shows the list of movie with titles and on click of each movie shows the detailed list of the items. 
+In homepage it shows the list of movie with titles and on click of each movie shows the detailed list of the items.
 
 Tech Stack
 -----------
