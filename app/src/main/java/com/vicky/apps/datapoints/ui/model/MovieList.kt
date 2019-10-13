@@ -1,5 +1,9 @@
 package com.vicky.apps.datapoints.ui.model
 
+
+import com.google.gson.annotations.SerializedName
+
 data class MovieList(
-    val movies: List<Movie>
+    @SerializedName("movies")
+    var movies: List<Movie> = listOf()
 )
