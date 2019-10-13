@@ -17,7 +17,6 @@ import com.vicky.apps.datapoints.ui.model.DetailData
 import com.vicky.apps.datapoints.ui.model.DetailModel
 import com.vicky.apps.datapoints.ui.viewmodel.DetailListViewModel
 import kotlinx.android.synthetic.main.activity_detail_list.*
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class DetailListActivity : BaseActivity() {
@@ -37,21 +36,22 @@ class DetailListActivity : BaseActivity() {
 
         loadValues()
 
-        var intent: Intent =intent
+        val intent: Intent =intent
 
-        var list: ArrayList<DetailModel>
+        val list: ArrayList<DetailModel>
 
-        var data: DetailData = intent?.extras?.getSerializable(AppConstants.LIST_DATA) as DetailData
+        val data: DetailData = intent.extras?.getSerializable(AppConstants.LIST_DATA) as DetailData
 
         list = data.list
 
-        val poster = intent?.extras?.getString(AppConstants.POSTER_DATA)
+        val poster = intent.extras?.getString(AppConstants.POSTER_DATA)
+        val poster2 = intent.extras?.getString(AppConstants.POSTER_DATA2)
 
         initializeValues(
-           list,poster)
+           list,poster, poster2)
     }
 
-    private fun initializeValues(data: ArrayList<DetailModel>?, poster: String?) {
+    private fun initializeValues(data: ArrayList<DetailModel>?, poster: String?, poster2: String?) {
         recyclerView = bodyRecyclerView
 
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
@@ -60,12 +60,12 @@ class DetailListActivity : BaseActivity() {
 
         recyclerView.adapter = adapter
 
-        if (isNotEmpty(poster!!)){
-            loadPosterData(
-                poster,singleImageHolder)
-        }else{
-            loadDefaultPoster(singleImageHolder)
+        when {
+            isNotEmpty(poster!!) -> loadPosterData(poster, singleImageHolder)
+            isNotEmpty(poster2!!) -> loadPosterData(poster2, singleImageHolder)
+            else -> loadDefaultPoster(singleImageHolder)
         }
+
 
     }
 

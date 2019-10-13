@@ -63,12 +63,14 @@ class MainActivity : BaseActivity() {
 
     private fun clickedItem(it: Movie) {
         val data:ArrayList<DetailModel> =  viewModel.frameData(it)
-        val posterData = it.poster2
+        val posterData = it.poster
+        val posterData2 = it.poster2
 
         val intent = Intent(this,DetailListActivity::class.java)
         val bundle = Bundle()
         bundle.putSerializable(AppConstants.LIST_DATA, DetailData(data))
         bundle.putString(AppConstants.POSTER_DATA,posterData)
+        bundle.putString(AppConstants.POSTER_DATA2,posterData2)
         intent.putExtras(bundle)
         startActivity(intent)
     }
