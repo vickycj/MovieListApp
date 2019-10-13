@@ -17,6 +17,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
+import android.util.Log
 import android.view.MenuItem
 import android.widget.SearchView
 import com.vicky.apps.datapoints.base.AppConstants
@@ -38,7 +39,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.vicky.apps.datapoints.R.layout.activity_main)
-        inilializingRecyclerView()
+       // inilializingRecyclerView()
         initializeValues()
 
     }
@@ -69,22 +70,22 @@ class MainActivity : BaseActivity() {
 
 
 
-       // viewModel.getDataFromRemote()
+        viewModel.getDataFromRemote()
     }
 
-    private fun sortAndUpdateData() {
-        updateData()
-    }
+
     private fun successCallback(){
         updateData()
+        Log.v("apival", viewModel.getMovieList().size.toString())
     }
 
     private fun updateData(){
-        adapter.updateData()
+//        adapter.updateData()
     }
 
 
     private fun failureCallback(){
+        Log.v("api", "Api failed")
         Toast.makeText(this,"API failed",Toast.LENGTH_LONG).show()
     }
 
