@@ -15,7 +15,7 @@ import com.vicky.apps.datapoints.ui.model.Movie
 
 class DataAdapter constructor(var data: List<Movie>) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
 
-
+    var onItemClick: ((Movie) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.recycler_child_view,parent,false)
         return DataViewHolder(v)
@@ -51,8 +51,14 @@ class DataAdapter constructor(var data: List<Movie>) : RecyclerView.Adapter<Data
         data = newData
         notifyDataSetChanged()
     }
-    class DataViewHolder(v:View): RecyclerView.ViewHolder(v){
+    inner class DataViewHolder(v:View): RecyclerView.ViewHolder(v){
         val posterImage: ImageView = v.findViewById(R.id.imageView)
         val movieName: TextView = v.findViewById(R.id.textView)
+
+        init {
+            v.setOnClickListener {
+                onItemClick?.invoke(data[adapterPosition])
+            }
+        }
     }
 }

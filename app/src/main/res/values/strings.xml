@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MovieList</string>
     <string name="default_movie">Default Movie</string>
+    <string name="key">Key</string>
+    <string name="value">value</string>
+    <string name="seperator">:</string>
 </resources>

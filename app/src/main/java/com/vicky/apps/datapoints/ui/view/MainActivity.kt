@@ -1,5 +1,7 @@
 package com.vicky.apps.datapoints.ui.view
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +14,10 @@ import com.vicky.apps.datapoints.ui.viewmodel.MainViewModel
 import javax.inject.Inject
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
+import com.vicky.apps.datapoints.base.AppConstants
+import com.vicky.apps.datapoints.ui.model.DetailData
+import com.vicky.apps.datapoints.ui.model.DetailModel
+import com.vicky.apps.datapoints.ui.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -49,6 +55,22 @@ class MainActivity : BaseActivity() {
         adapter = DataAdapter(viewModel.getMovieList())
 
         recyclerView.adapter = adapter
+
+        adapter.onItemClick = {
+            clickedItem(it)
+        }
+    }
+
+    private fun clickedItem(it: Movie) {
+        val data:ArrayList<DetailModel> =  viewModel.frameData(it)
+        val posterData = it.poster2
+
+        val intent = Intent(this,DetailListActivity::class.java)
+        val bundle = Bundle()
+        bundle.putSerializable(AppConstants.LIST_DATA, DetailData(data))
+        bundle.putString(AppConstants.POSTER_DATA,posterData)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 
 
