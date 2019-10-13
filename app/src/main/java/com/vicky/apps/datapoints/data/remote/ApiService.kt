@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 
 interface ApiService {
-    @GET("")
+    @GET("/bins/18buhu")
     fun getDataFromService(): Single<List<Any>>
 }
